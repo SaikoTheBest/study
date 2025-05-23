@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سوالات و پاسخ‌های کتاب عربی (ترجمه شده)</title>
+    <title>أسئلة الكتاب العربي مع الترجمة الفارسية</title>
     <style>
         :root {
             --primary: #bb86fc;
@@ -68,12 +68,35 @@
             color: #888;
             font-style: italic;
             margin-top: 5px;
+            border-top: 1px dashed #444;
+            padding-top: 5px;
+        }
+        .original {
+            color: var(--text);
+        }
+        .language-tab {
+            display: inline-block;
+            padding: 5px 10px;
+            margin-left: 5px;
+            background: #333;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+        }
+        .language-tab.active {
+            background: var(--surface);
+            color: var(--secondary);
+        }
+        .language-content {
+            display: none;
+        }
+        .language-content.active {
+            display: block;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>سوالات و پاسخ‌های کتاب عربی (ترجمه شده)</h1>
+        <h1>أسئلة الكتاب العربي مع الترجمة الفارسية</h1>
         <div id="content"></div>
     </div>
 
@@ -81,96 +104,204 @@
         const qaData = [
             {
                 page: 1,
-                question: "چند نمونه از صنایع دستی بادیه نشینان را نام ببرید؟",
-                answer: "- توسعه و بهبود<br>- ساخت گل‌ها<br>- ساخت آب از مشک<br>- ساخت نخ<br>- بافتنی<br>- سفالگری<br>- ساخت سبد از برگ خرما"
+                question: {
+                    ar: "ما هي بعض الحرف البدوية المذكورة؟",
+                    fa: "چند نمونه از صنایع دستی بادیه نشینان را نام ببرید؟"
+                },
+                answer: {
+                    ar: "- التطوير<br>- صنع الأزهار<br>- صنع الماء من القربة<br>- صنع الغزل<br>- النسيج<br>- الفخار<br>- صناعة الخوص الرعاجي",
+                    fa: "- توسعه و بهبود<br>- ساخت گل‌ها<br>- ساخت آب از مشک<br>- ساخت نخ<br>- بافتنی<br>- سفالگری<br>- ساخت سبد از برگ خرما"
+                }
             },
             {
                 page: 2,
-                question: "راه‌های بازاریابی محصولات را ذکر کنید.",
-                answer: "۱. نمایش تصاویر محصولات<br>۲. مشاهده رقبا<br>۳. آگاهی از نظرات مشتریان<br>۴. مشارکت در نمایشگاه‌ها<br>۵. ایجاد روابط تجاری خاص"
+                question: {
+                    ar: "ما هي طرق تسويق المنتجات؟",
+                    fa: "راه‌های بازاریابی محصولات را ذکر کنید."
+                },
+                answer: {
+                    ar: "۱. عرض صور المنتجات<br>۲. مشاهدة المنافسين<br>۳. التعرف على آراء الزبائن<br>۴. المشاركة في المعارض<br>۵. إنشاء علاقة تجارية خاصة",
+                    fa: "۱. نمایش تصاویر محصولات<br>۲. مشاهده رقبا<br>۳. آگاهی از نظرات مشتریان<br>۴. مشارکت در نمایشگاه‌ها<br>۵. ایجاد روابط تجاری خاص"
+                }
             },
             {
                 page: 3,
-                question: "معانی کلمات زیر چیست؟",
-                answer: "- <strong>قـف:</strong> شغال (گرگ صحرایی)<br>- <strong>قـنون:</strong> قانون<br>- <strong>شــتــمــيــان:</strong> جلب کننده دل<br>- <strong>شــطــر:</strong> ناقص<br>- <strong>مــكــســب:</strong> سود<br>- <strong>شــافــســيــن:</strong> رقیبان<br>- <strong>شــقــتــة:</strong> مینیاتور"
+                question: {
+                    ar: "ما معاني الكلمات التالية؟",
+                    fa: "معانی کلمات زیر چیست؟"
+                },
+                answer: {
+                    ar: "- <strong>قـف:</strong> شغال<br>- <strong>قـنون:</strong> قانون<br>- <strong>شــتــمــيــان:</strong> به‌دست‌آورندۀ دل<br>- <strong>شــطــر:</strong> ناقص<br>- <strong>مــكــســب:</strong> سود<br>- <strong>شــافــســيــن:</strong> رقیبان<br>- <strong>شــقــتــة:</strong> مینیاتور",
+                    fa: "- <strong>قـف:</strong> شغال (گرگ صحرایی)<br>- <strong>قـنون:</strong> قانون<br>- <strong>شــتــمــيــان:</strong> جلب کننده دل<br>- <strong>شــطــر:</strong> ناقص<br>- <strong>مــكــســب:</strong> سود<br>- <strong>شــافــســيــن:</strong> رقیبان<br>- <strong>شــقــتــة:</strong> مینیاتور"
+                }
             },
             {
                 page: 4,
-                question: "گفتگوی مربوط به نظافت هتل را بیان کنید و مسئول نظافت اتاق‌ها را مشخص نمایید.",
-                answer: `
-                <div class="conversation">
-                    <div><span class="speaker">مهمان:</span> مسئول نظافت اتاق‌ها و حفظ نظم آن‌ها کیست؟</div>
-                    <div><span class="speaker">استاد دمشقی (سرپرست خدمات اتاق‌های هتل):</span> مشکل چیست؟</div>
-                    <div><span class="speaker">مهمان:</span> عذر می‌خواهم، لطفاً استراحت کنید: من با سرپرست صحبت می‌کنم.</div>
-                    <div><span class="speaker">کارمند:</span> اتاق من و همکارانم تمیز است، اما مشکلاتی دارد.</div>
-                    <div><span class="speaker">کارمند:</span> در اتاق اول تخت شکسته و در اتاق دوم ملافه کم است.</div>
-                    <div><span class="speaker">سرپرست:</span> در حین نظافت می‌آید، مشکلات دیگر چیست؟</div>
-                    <div><span class="speaker">کارمند:</span> همه کارها را به سرعت انجام می‌دهم.</div>
-                </div>
-                <strong>پاسخ:</strong> استاد دمشقی سرپرست خدمات اتاق‌های هتل مسئول نظافت است.`
+                question: {
+                    ar: "من هو المسؤول عن تنظيف الغرف في الفندق؟ وما هي المحادثة التي جرت؟",
+                    fa: "مسئول نظافت اتاق‌های هتل کیست؟ و گفتگوی مربوطه چیست؟"
+                },
+                answer: {
+                    ar: `
+                    <div class="conversation">
+                        <div><span class="speaker">الضيف:</span> من هو مسؤول تنظيف الغرف و الحفاظ عليها؟</div>
+                        <div><span class="speaker">الأستاذ الدمشقي:</span> ما هي المشكلة؟</div>
+                        <div><span class="speaker">الضيف:</span> أعتذر منك، رجاء استريخ: سأقوم بالمشرف.</div>
+                        <div><span class="speaker">الموظف:</span> تست غرفتي و غرف زملائي نظيفة، و فيها توافض.</div>
+                        <div><span class="speaker">الموظف:</span> في الغرفة الأولى سريز مكسور و في الغرفة الثانية شريف ناقص.</div>
+                        <div><span class="speaker">المشرف:</span> سيأتي خلال التنظيف، و ما المشكلات الأخرى؟</div>
+                        <div><span class="speaker">الموظف:</span> سأقوم بكل شيء بسرعة على عيني.</div>
+                    </div>
+                    <strong>الجواب:</strong> الأستاذ الدمشقي مشرف خدمات غرف الفندق`,
+                    fa: `
+                    <div class="conversation">
+                        <div><span class="speaker">مهمان:</span> مسئول نظافت اتاق‌ها و حفظ نظم آن‌ها کیست؟</div>
+                        <div><span class="speaker">استاد دمشقی (سرپرست خدمات اتاق‌های هتل):</span> مشکل چیست؟</div>
+                        <div><span class="speaker">مهمان:</span> عذر می‌خواهم، لطفاً استراحت کنید: من با سرپرست صحبت می‌کنم.</div>
+                        <div><span class="speaker">کارمند:</span> اتاق من و همکارانم تمیز است، اما مشکلاتی دارد.</div>
+                        <div><span class="speaker">کارمند:</span> در اتاق اول تخت شکسته و در اتاق دوم ملافه کم است.</div>
+                        <div><span class="speaker">سرپرست:</span> در حین نظافت می‌آید، مشکلات دیگر چیست؟</div>
+                        <div><span class="speaker">کارمند:</span> همه کارها را به سرعت انجام می‌دهم.</div>
+                    </div>
+                    <strong>پاسخ:</strong> استاد دمشقی سرپرست خدمات اتاق‌های هتل`
+                }
             },
             {
                 page: 5,
-                question: "فعل مجهول در فارسی و عربی چگونه ساخته می‌شود؟",
-                answer: "- <strong>فارسی:</strong> با استفاده از \"شدن\" (مثال: زد → زده شد)<br>- <strong>عربی:</strong> با تغییر وزن فعل (مثال: کَتَبَ → کُتِبَ)"
+                question: {
+                    ar: "كيف يصاغ الفعل المبني للمجهول في اللغة الفارسية والعربية؟",
+                    fa: "فعل مجهول در فارسی و عربی چگونه ساخته می‌شود؟"
+                },
+                answer: {
+                    ar: "- <strong>الفارسية:</strong> باستخدام \"شدن\" (مثال: زد → زده شد)<br>- <strong>العربية:</strong> بتغيير وزن الفعل (مثال: كَتَبَ → كُتِبَ)",
+                    fa: "- <strong>فارسی:</strong> با استفاده از \"شدن\" (مثال: زد → زده شد)<br>- <strong>عربی:</strong> با تغییر وزن فعل (مثال: کَتَبَ → کُتِبَ)"
+                }
             },
             {
                 page: 6,
-                question: "افعال مجهول را در آیات زیر شناسایی کنید.",
-                answer: "۱. <strong>يُتْلَى</strong> (آیه ۲۰۴ سوره اعراف)<br>۲. <strong>يُظْلَمُونَ</strong> (آیه ۶۰ سوره مریم)<br>۳. <strong>خُلِقَتْ</strong> (آیه ۱۷ سوره غاشیه)"
+                question: {
+                    ar: "حدد الأفعال المبني للمجهول في الآيات التالية:",
+                    fa: "افعال مجهول را در آیات زیر شناسایی کنید."
+                },
+                answer: {
+                    ar: "١. <strong>يُتْلَى</strong> (سورة الأعراف الآية ٢٠٤)<br>٢. <strong>يُظْلَمُونَ</strong> (سورة مريم الآية ٦٠)<br>٣. <strong>خُلِقَتْ</strong> (سورة الغاشية الآية ١٧)",
+                    fa: "١. <strong>يُتْلَى</strong> (آیه ۲۰۴ سوره اعراف)<br>٢. <strong>يُظْلَمُونَ</strong> (آیه ۶۰ سوره مریم)<br>٣. <strong>خُلِقَتْ</strong> (آیه ۱۷ سوره غاشیه)"
+                }
             },
             {
                 page: 7,
-                question: "کلمات مناسب را در جای خالی قرار دهید.",
-                answer: "۱. <strong>شتر</strong> به کشتی صحرا معروف است.<br>۲. <strong>ماه رمضان</strong>، ماه عبادت و روزه است.<br>۳. لطفاً <strong>به استادی که با شما صحبت می‌کند گوش دهید</strong>."
+                question: {
+                    ar: "املأ الفراغات بالكلمات المناسبة:",
+                    fa: "کلمات مناسب را در جای خالی قرار دهید."
+                },
+                answer: {
+                    ar: "١. <strong>تُعْرَفُ</strong> الإبل <strong>بِسَفِينَةِ الصَّحْرَاءِ.</strong><br>٢. <strong>شَهْرُ رَمَضَانَ، شَهْرُ الصِّيَامِ.</strong><br>٣. <strong>أَنْصِتُوا</strong> لِلْأُسْتَاذِ.",
+                    fa: "١. <strong>شتر</strong> به کشتی صحرا معروف است.<br>٢. <strong>ماه رمضان</strong>، ماه عبادت و روزه است.<br>٣. لطفاً <strong>به استادی که با شما صحبت می‌کند گوش دهید</strong>."
+                }
             },
             {
                 page: 8,
-                question: "گزینه صحیح را انتخاب کنید.",
-                answer: "- <strong>کلمه غیرعربی:</strong> کلید<br>- <strong>فعل مجهول:</strong> نوشته می‌شود<br>- <strong>معنی «کشته شد»:</strong> به قتل رسید<br>- <strong>فرمان از «می‌دانید»:</strong> بدانید"
+                question: {
+                    ar: "اختر الإجابة الصحيحة:",
+                    fa: "گزینه صحیح را انتخاب کنید."
+                },
+                answer: {
+                    ar: "- <strong>الكلمة الغريبة:</strong> مفتاح<br>- <strong>الفعل المبني للمجهول:</strong> يُكتَب<br>- <strong>معنى «قُتِلَ»:</strong> كُشِفَ<br>- <strong>صيغة الأمر من «تعلمون»:</strong> اعلموا",
+                    fa: "- <strong>کلمه غیرعربی:</strong> کلید<br>- <strong>فعل مجهول:</strong> نوشته می‌شود<br>- <strong>معنی «کشته شد»:</strong> به قتل رسید<br>- <strong>فرمان از «می‌دانید»:</strong> بدانید"
+                }
             },
             {
                 page: 9,
-                question: "اوریگامی چیست؟",
-                answer: "هنر تا کردن کاغذ برای ایجاد اشکال زیبا که به تمرکز کمک می‌کند."
+                question: {
+                    ar: "ما هو الأوريغامي؟",
+                    fa: "اوریگامی چیست؟"
+                },
+                answer: {
+                    ar: "فن طي الورق لإنشاء أشكال جميلة تساعد على التركيز.",
+                    fa: "هنر تا کردن کاغذ برای ایجاد اشکال زیبا که به تمرکز کمک می‌کند."
+                }
             },
             {
                 page: 10,
-                question: "ترجمه آیه ۹۰ سوره انعام چیست؟",
-                answer: "\"خداوند شکافنده دانه و هسته است، زنده را از مرده بیرون می‌آورد و مرده را از زنده خارج می‌سازد.\""
+                question: {
+                    ar: "ما ترجمة الآية ٩٠ من سورة الأنعام؟",
+                    fa: "ترجمه آیه ۹۰ سوره انعام چیست؟"
+                },
+                answer: {
+                    ar: "\"الله فالق الحب والنوى، يخرج الحي من الميت ويخرج الميت من الحي.\"",
+                    fa: "\"خداوند شکافنده دانه و هسته است، زنده را از مرده بیرون می‌آورد و مرده را از زنده خارج می‌سازد.\""
+                }
             },
             {
                 page: "11-12",
-                question: "ویژگی‌های درختان شگفت‌انگیز را ذکر کنید.",
-                answer: "- <strong>درخت سکویا:</strong> ارتفاع بیش از ۱۰۰ متر<br>- <strong>درخت انگلی:</strong> زندگی انگلی دارد<br>- <strong>درخت انجیر:</strong> میوه‌های شیرین<br>- <strong>درخت بلوط:</strong> عمر طولانی (۵۰۰ سال)"
+                question: {
+                    ar: "ما هي خصائص الأشجار العجيبة؟",
+                    fa: "ویژگی‌های درختان شگفت‌انگیز را ذکر کنید."
+                },
+                answer: {
+                    ar: "- <strong>شجرة السكويا:</strong> يزيد ارتفاعها عن ١٠٠ متر<br>- <strong>الشجرة الغانية:</strong> تعيش حياة طفيلية<br>- <strong>شجرة التين:</strong> ثمارها حلوة<br>- <strong>شجرة البلوط:</strong> تعيش طويلاً (٥٠٠ سنة)",
+                    fa: "- <strong>درخت سکویا:</strong> ارتفاع بیش از ۱۰۰ متر<br>- <strong>درخت انگلی:</strong> زندگی انگلی دارد<br>- <strong>درخت انجیر:</strong> میوه‌های شیرین<br>- <strong>درخت بلوط:</strong> عمر طولانی (۵۰۰ سال)"
+                }
             },
             {
                 page: 14,
-                question: "گفتگوی مربوط به مشکل شارژ تلفن همراه را بیان کنید و نحوه حل مشکل را شرح دهید.",
-                answer: `
-                <div class="conversation">
-                    <div><span class="speaker">مراجعه کننده:</span> لطفاً یک سیم‌کارت موبایل به من بدهید.</div>
-                    <div><span class="speaker">کارمند:</span> بفرمایید، آیا کارت شارژ هم می‌خواهید؟</div>
-                    <div><span class="speaker">مراجعه کننده:</span> بله؛ لطفاً یک کارت شارژ به مبلغ بیست و پنج ریال به من بدهید.</div>
-                    <div><span class="speaker">مراجعه کننده:</span> عذر می‌خواهم، در کارت شارژ مشکلی وجود دارد. لطفاً کارت را به من بدهید.</div>
-                    <div><span class="speaker">کارمند:</span> مرا ببخشید، حق با شماست. کارت را برای شما تعویض می‌کنم.</div>
-                </div>
-                <strong>پاسخ:</strong> مشکل با تعویض کارت شارژ معیوب توسط کارمند بخش ارتباطات حل شد.`
+                question: {
+                    ar: "كيف تم حل مشكلة شحن الهاتف المحمول؟ وما هي المحادثة؟",
+                    fa: "مشکل شارژ تلفن همراه چگونه حل شد؟ و گفتگو چیست؟"
+                },
+                answer: {
+                    ar: `
+                    <div class="conversation">
+                        <div><span class="speaker">الزائر:</span> رجاءً، أعطيني شريحة الجوال.</div>
+                        <div><span class="speaker">الموظف:</span> تفضل، هل تريدين بطاقة الشحن؟</div>
+                        <div><span class="speaker">الزائر:</span> نعم؛ من فضلك أعطني بطاقة بمبلغ خمسة وعشرين ريالاً.</div>
+                        <div><span class="speaker">الزائر:</span> عفواً، في بطاقة الشحن إشكال. أعطيني البطاقة من فضلك.</div>
+                        <div><span class="speaker">الموظف:</span> سامحيني، أنت على الحق. أبدل لك البطاقة.</div>
+                    </div>
+                    <strong>الجواب:</strong> تم حل المشكلة باستبدال بطاقة الشحن المعيبة من قبل موظف الاتصالات`,
+                    fa: `
+                    <div class="conversation">
+                        <div><span class="speaker">مراجعه کننده:</span> لطفاً یک سیم‌کارت موبایل به من بدهید.</div>
+                        <div><span class="speaker">کارمند:</span> بفرمایید، آیا کارت شارژ هم می‌خواهید؟</div>
+                        <div><span class="speaker">مراجعه کننده:</span> بله؛ لطفاً یک کارت شارژ به مبلغ بیست و پنج ریال به من بدهید.</div>
+                        <div><span class="speaker">مراجعه کننده:</span> عذر می‌خواهم، در کارت شارژ مشکلی وجود دارد. لطفاً کارت را به من بدهید.</div>
+                        <div><span class="speaker">کارمند:</span> مرا ببخشید، حق با شماست. کارت را برای شما تعویض می‌کنم.</div>
+                    </div>
+                    <strong>پاسخ:</strong> مشکل با تعویض کارت شارژ معیوب توسط کارمند بخش ارتباطات حل شد`
+                }
             },
             {
                 page: "15-16",
-                question: "اسم فاعل و مفعول چیست؟ مثال بزنید.",
-                answer: "- <strong>اسم فاعل:</strong> انجام دهنده کار (مثال: سازنده، آفریدگار)<br>- <strong>اسم مفعول:</strong> چیزی که بر آن عمل انجام شده (مثال: ساخته شده، آفریده شده)"
+                question: {
+                    ar: "ما هو اسم الفاعل واسم المفعول؟ اذكر أمثلة.",
+                    fa: "اسم فاعل و مفعول چیست؟ مثال بزنید."
+                },
+                answer: {
+                    ar: "- <strong>اسم الفاعل:</strong> من يقوم بالفعل (مثال: صانع، خالق)<br>- <strong>اسم المفعول:</strong> ما وقع عليه الفعل (مثال: مصنوع، مخلوق)",
+                    fa: "- <strong>اسم فاعل:</strong> انجام دهنده کار (مثال: سازنده، آفریدگار)<br>- <strong>اسم مفعول:</strong> چیزی که بر آن عمل انجام شده (مثال: ساخته شده، آفریده شده)"
+                }
             },
             {
                 page: 17,
-                question: "جملات صحیح و غلط را مشخص کنید.",
-                answer: "- ✓ <strong>می‌توان سیم‌کارت را از اداره ارتباطات خریداری کرد.</strong><br>- ✗ <strong>اقیانوس آرام در شمال استان مازندران قرار دارد.</strong>"
+                question: {
+                    ar: "حدد الجمل الصحيحة والخاطئة:",
+                    fa: "جملات صحیح و غلط را مشخص کنید."
+                },
+                answer: {
+                    ar: "- ✓ <strong>يُمكِنُ شَرَاء الشَّرِيحَة مِن إدَارَة الاتِّصَالَات.</strong><br>- ✗ <strong>المُحِيطُ الهَادِئُ فِي شَمَال مَازَندَرَان.</strong>",
+                    fa: "- ✓ <strong>می‌توان سیم‌کارت را از اداره ارتباطات خریداری کرد.</strong><br>- ✗ <strong>اقیانوس آرام در شمال استان مازندران قرار دارد.</strong>"
+                }
             },
             {
                 page: "19-20",
-                question: "شگفتی‌های آفرینش خدا را نام ببرید.",
-                answer: "- <strong>سرو ۴۵۰۰ ساله ابرکوه</strong><br>- <strong>نیلوفر آبی آمازون</strong><br>- <strong>شفق قطبی</strong><br>- <strong>غار علیصدر</strong>"
+                question: {
+                    ar: "اذكر بعض عجائب خلق الله.",
+                    fa: "شگفتی‌های آفرینش خدا را نام ببرید."
+                },
+                answer: {
+                    ar: "- <strong>سرو عمره ٤٥٠٠ سنة في أبركوه</strong><br>- <strong>زنبق الماء العملاق في الأمازون</strong><br>- <strong>الشفق القطبي</strong><br>- <strong>غار عليصدر</strong>",
+                    fa: "- <strong>سرو ۴۵۰۰ ساله ابرکوه</strong><br>- <strong>نیلوفر آبی آمازون</strong><br>- <strong>شفق قطبی</strong><br>- <strong>غار علیصدر</strong>"
+                }
             }
         ];
 
@@ -178,11 +309,33 @@
             const contentDiv = document.getElementById('content');
             contentDiv.innerHTML = qaData.map(item => `
                 <div class="qa-section">
-                    <div class="question">صفحه ${item.page}: ${item.question}</div>
-                    <div class="answer">${item.answer}</div>
-                    <div class="page-number">صفحه ${item.page}</div>
+                    <div class="question">
+                        <span class="language-tab active" onclick="switchLanguage(this, 'ar')">العربية</span>
+                        <span class="language-tab" onclick="switchLanguage(this, 'fa')">فارسی</span>
+                        <div class="language-content ar active">صفحة ${item.page}: ${item.question.ar}</div>
+                        <div class="language-content fa">صفحه ${item.page}: ${item.question.fa}</div>
+                    </div>
+                    <div class="answer">
+                        <span class="language-tab active" onclick="switchLanguage(this, 'ar')">العربية</span>
+                        <span class="language-tab" onclick="switchLanguage(this, 'fa')">فارسی</span>
+                        <div class="language-content ar active">${item.answer.ar}</div>
+                        <div class="language-content fa">${item.answer.fa}</div>
+                    </div>
+                    <div class="page-number">صفحة ${item.page}</div>
                 </div>
             `).join('');
+        }
+
+        function switchLanguage(tabElement, lang) {
+            const container = tabElement.parentElement;
+            const tabs = container.querySelectorAll('.language-tab');
+            const contents = container.querySelectorAll('.language-content');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+            
+            tabElement.classList.add('active');
+            container.querySelector(`.language-content.${lang}`).classList.add('active');
         }
 
         document.addEventListener('DOMContentLoaded', renderContent);
