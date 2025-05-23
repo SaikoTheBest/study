@@ -53,6 +53,17 @@
             margin-top: 5px;
             text-align: left;
         }
+        .conversation {
+            background: #2a2a2a;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-right: 3px solid var(--primary);
+        }
+        .speaker {
+            color: var(--primary);
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -80,8 +91,18 @@
             },
             {
                 page: 4,
-                question: "در هتل، چه کسی مسئول نظافت اتاق‌هاست؟",
-                answer: "<strong>أستاذ دمشقي مشرف خدمات غرف الفندق.</strong>"
+                question: "مکالمه مربوط به نظافت هتل را بازگو کنید و بگویید چه کسی مسئول نظافت اتاق‌هاست؟",
+                answer: `
+                <div class="conversation">
+                    <div><span class="speaker">مهمان:</span> من هو مسؤول تنظيف الغرف و الحفاظ عليها؟</div>
+                    <div><span class="speaker">أستاذ دمشقي:</span> ما هي المشكلة؟</div>
+                    <div><span class="speaker">مهمان:</span> أعتذر منك، رجاء استريخ: سأقوم بالمشرف.</div>
+                    <div><span class="speaker">موظف:</span> تست غرفتي و غرف زملائي نظيفة، و فيها توافض.</div>
+                    <div><span class="speaker">موظف:</span> في الغرفة الأولى سريز مكسور و في الغرفة الثانية شريف ناقص.</div>
+                    <div><span class="speaker">مشرف:</span> سيأتي خلال التنظيف، و ما المشكلات الأخرى؟</div>
+                    <div><span class="speaker">موظف:</span> سأقوم بكل شيء بسرعة على عيني.</div>
+                </div>
+                <strong>پاسخ:</strong> أستاذ دمشقي مشرف خدمات غرف الفندق مسئول نظافت اتاق‌هاست.`
             },
             {
                 page: 5,
@@ -120,8 +141,16 @@
             },
             {
                 page: 14,
-                question: "مشکل شارژ تلفن همراه چگونه حل شد؟",
-                answer: "<strong>موظف الاتصالات، کارت معیوب را تعویض کرد.</strong>"
+                question: "مکالمه مربوط به مشکل شارژ تلفن همراه را بازگو کنید و بگویید مشکل چگونه حل شد؟",
+                answer: `
+                <div class="conversation">
+                    <div><span class="speaker">زائر:</span> رجاءً، أعطيني شريحة الجوال.</div>
+                    <div><span class="speaker">موظف:</span> تفضل، هل تريدين بطاقة الشحن؟</div>
+                    <div><span class="speaker">زائر:</span> نعم؛ من فضلك أعطني بطاقة بمبلغ خمسة وعشرين ريالاً.</div>
+                    <div><span class="speaker">زائر:</span> عفواً، في بطاقة الشحن إشكال. أعطيني البطاقة من فضلك.</div>
+                    <div><span class="speaker">موظف:</span> سامحيني، أنت على الحق. أبدل لك البطاقة.</div>
+                </div>
+                <strong>پاسخ:</strong> مشکل با تعویض کارت شارژ معیوب توسط موظف الاتصالات حل شد.`
             },
             {
                 page: "15-16",
