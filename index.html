@@ -265,7 +265,6 @@ private void button1_Click(object sender, EventArgs e)
     if (Directory.Exists(directory))
     {
         // گرفتن لیست پوشه‌ها و اضافه کردن به listBox1
-        // در تصویر ارسالی شما، کل مسیر اضافه می‌شود.
         // اگر فقط نام پوشه مد نظر است، باید از Path.GetFileName استفاده کرد.
         listBox1.Items.AddRange(Directory.GetDirectories(directory));
     }
