@@ -117,13 +117,13 @@ private void btnSaveWelcome_Click(object sender, EventArgs e)
                 <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک دکمه btnSaveNote
 private void btnSaveNote_Click(object sender, EventArgs e)
 {
-    string note = txtUserNote.Text; // متنی که کاربر نوشته
-    if (string.IsNullOrWhiteSpace(note))
+    // متنی که کاربر نوشته
+    if (txtUserNote.Text.Length == 0) // بررسی اینکه آیا تکست‌باکس خالی است
     {
         MessageBox.Show("لطفاً ابتدا یک یادداشت بنویسید.", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         return; // از ادامه اجرای متد جلوگیری می‌کند چون یادداشت خالی است
     }
-    File.WriteAllText("MyPersonalNote.txt", note);
+    File.WriteAllText("MyPersonalNote.txt", txtUserNote.Text);
     MessageBox.Show("یادداشت شما در فایل MyPersonalNote.txt ذخیره شد.");
 }</code></pre>
             </article>
@@ -136,7 +136,7 @@ private void btnSaveNote_Click(object sender, EventArgs e)
                 <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک یک دکمه به نام btnAddToShoppingList
 private void btnAddToShoppingList_Click(object sender, EventArgs e)
 {
-    string newItem = "شیر ۲ لیتر";
+    string newItem = "شیر ۲ لیتر"; // می‌توانید این را از یک TextBox بگیرید
     // Environment.NewLine باعث می‌شود هر آیتم در یک خط جدید نوشته شود.
     File.AppendAllText("ShoppingList.txt", newItem + Environment.NewLine);
     MessageBox.Show($"'{newItem}' به لیست خرید اضافه شد.");
@@ -394,10 +394,9 @@ private void btnReset_Click(object sender, EventArgs e)
                 <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک دکمه btnAddTask
 private void btnAddTask_Click(object sender, EventArgs e)
 {
-    string task = txtNewTask.Text;
-    if (!string.IsNullOrWhiteSpace(task))
+    if (txtNewTask.Text.Length > 0) // بررسی اینکه آیا تکست‌باکس متنی دارد
     {
-        lstTasks.Items.Add(task); // اضافه کردن کار جدید به لیست
+        lstTasks.Items.Add(txtNewTask.Text); // اضافه کردن کار جدید به لیست
         txtNewTask.Clear();       // پاک کردن تکست‌باکس
         txtNewTask.Focus();       // آماده برای کار بعدی
     }
