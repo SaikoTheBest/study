@@ -252,64 +252,53 @@ private void btnDeleteLog_Click(object sender, EventArgs e)
                 پوشه‌ها (یا دایرکتوری‌ها) به ما کمک می‌کنند فایل‌هایمان را مرتب کنیم. با C# می‌توانیم لیست فایل‌ها یا پوشه‌های داخل یک پوشه دیگر را بگیریم.
             </p>
             <article class="mb-6">
-                <h3 class="text-xl sm:text-2xl font-medium mb-3 dark-h3">۱. گرفتن لیست پوشه‌های داخل یک پوشه با <code>Directory.GetDirectories</code></h3>
+                <h3 class="text-xl sm:text-2xl font-medium mb-3 dark-h3">۱. گرفتن لیست پوشه‌های داخل یک مسیر با <code>Directory.GetDirectories</code></h3>
                 <p class="mb-2">این دستور آدرس تمام <strong>پوشه‌هایی</strong> که مستقیماً داخل یک مسیر مشخص هستند را به شما می‌دهد.</p>
-                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال: نمایش پوشه‌های درایو C در یک <code>ListBox</code></h4>
-                <p class="mb-2">فرض کنید یک <code>ListBox</code> به نام <code>lstFoldersOnC</code> و یک دکمه <code>btnListCDriveFolders</code> دارید.</p>
-                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک دکمه btnListCDriveFolders
-private void btnListCDriveFolders_Click(object sender, EventArgs e)
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال: نمایش پوشه‌های درایو C در <code>listBox1</code> (مطابق تصویر ارسالی)</h4>
+                <p class="mb-2">فرض کنید یک <code>ListBox</code> به نام <code>listBox1</code> و یک دکمه (مثلاً <code>button1</code>) دارید.</p>
+                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک button1
+private void button1_Click(object sender, EventArgs e)
 {
-    lstFoldersOnC.Items.Clear();
-    string drivePath = "C:\\"; // مسیر درایو C
-                                // علامت @ هم می‌توانستیم بگذاریم: @"C:\"
+    string directory = @"C:\"; // مسیر ثابت درایو C
+    listBox1.Items.Clear(); // پاک کردن آیتم‌های قبلی
 
-    if (Directory.Exists(drivePath)) // چک می‌کنیم که درایو C وجود دارد
+    if (Directory.Exists(directory))
     {
-        string[] folderPaths = Directory.GetDirectories(drivePath);
-        foreach (string folderPath in folderPaths)
-        {
-            // فقط نام پوشه را استخراج و اضافه می‌کنیم (نه کل مسیر)
-            lstFoldersOnC.Items.Add(Path.GetFileName(folderPath));
-        }
+        // گرفتن لیست پوشه‌ها و اضافه کردن به listBox1
+        // در تصویر ارسالی شما، کل مسیر اضافه می‌شود.
+        // اگر فقط نام پوشه مد نظر است، باید از Path.GetFileName استفاده کرد.
+        listBox1.Items.AddRange(Directory.GetDirectories(directory));
     }
     else
     {
-        MessageBox.Show("درایو C پیدا نشد!");
+        MessageBox.Show("مسیر C:\\ پیدا نشد!");
     }
 }</code></pre>
-                <p class="mt-2"><strong class="dark-strong">نکته:</strong> <code>Path.GetFileName(folderPath)</code> از <code>System.IO</code> می‌آید و فقط نام پوشه (یا فایل) را از کل مسیر جدا می‌کند.</p>
             </article>
 
             <article class="mb-6">
-                <h3 class="text-xl sm:text-2xl font-medium mb-3 dark-h3">۲. گرفتن لیست فایل‌های داخل یک پوشه با <code>Directory.GetFiles</code></h3>
+                <h3 class="text-xl sm:text-2xl font-medium mb-3 dark-h3">۲. گرفتن لیست فایل‌های داخل یک مسیر با <code>Directory.GetFiles</code></h3>
                 <p class="mb-2">این دستور آدرس تمام <strong>فایل‌هایی</strong> که مستقیماً داخل یک مسیر مشخص هستند را به شما می‌دهد.</p>
-                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال: نمایش فایل‌های پوشه "My Documents" در یک <code>ListBox</code></h4>
-                <p class="mb-2">فرض کنید یک <code>ListBox</code> به نام <code>lstMyDocumentsFiles</code> و یک دکمه <code>btnListMyDocsFiles</code> دارید.</p>
-                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک دکمه btnListMyDocsFiles
-private void btnListMyDocsFiles_Click(object sender, EventArgs e)
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال: نمایش فایل‌های درایو C در <code>listBox1</code> (مطابق تصویر ارسالی)</h4>
+                <p class="mb-2">فرض کنید یک <code>ListBox</code> به نام <code>listBox1</code> و یک دکمه دیگر (مثلاً <code>button2</code>) دارید.</p>
+                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک button2
+private void button2_Click(object sender, EventArgs e)
 {
-    lstMyDocumentsFiles.Items.Clear();
-    // گرفتن مسیر پوشه My Documents کاربر فعلی
-    string myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+    string directory = @"C:\"; // مسیر ثابت درایو C
+    listBox1.Items.Clear(); // پاک کردن آیتم‌های قبلی
 
-    if (Directory.Exists(myDocumentsPath))
+    if (Directory.Exists(directory))
     {
-        // گرفتن تمام فایل‌ها (نه پوشه‌ها)
-        string[] filePaths = Directory.GetFiles(myDocumentsPath);
-        foreach (string filePath in filePaths)
-        {
-            lstMyDocumentsFiles.Items.Add(Path.GetFileName(filePath));
-        }
-
-        // می‌توانیم نوع خاصی از فایل‌ها را هم بگیریم:
-        // string[] textFiles = Directory.GetFiles(myDocumentsPath, "*.txt"); // فقط فایل‌های متنی
-        // lstMyDocumentsFiles.Items.AddRange(textFiles);
+        // گرفتن لیست فایل‌ها و اضافه کردن به listBox1
+        // در تصویر ارسالی شما، کل مسیر فایل اضافه می‌شود.
+        listBox1.Items.AddRange(Directory.GetFiles(directory));
     }
     else
     {
-        MessageBox.Show("پوشه My Documents پیدا نشد!");
+        MessageBox.Show("مسیر C:\\ پیدا نشد!");
     }
 }</code></pre>
+                 <p class="mt-2"><strong class="dark-strong">نکته مهم از تصویر شما:</strong> در کدی که در تصویر فرستادید، هر دو دکمه (<code>button1</code> و <code>button2</code>) نتایج خود را در یک `ListBox` به نام `listBox1` نمایش می‌دهند. قبل از نمایش لیست جدید، محتویات قبلی `listBox1` با دستور `listBox1.Items.Clear()` پاک می‌شود.</p>
             </article>
 
             <article class="mb-6">
