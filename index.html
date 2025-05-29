@@ -3,133 +3,527 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مستندات کد C#</title>
+    <title>راهنمای جامع C# برای مبتدیان</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* استایل‌های پایه برای تم دارک */
         body {
-            background-color: #121212;
-            color: #e0e0e0;
             font-family: 'Tahoma', 'Vazirmatn', sans-serif;
             line-height: 1.8;
             margin: 0;
             padding: 0;
+            direction: rtl; /* اطمینان از راست‌چین بودن کل صفحه */
         }
-        .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background-color: #1e1e1e;
-            border-radius: 10px;
-            border: 1px solid #333;
+        /* کلاس‌های Tailwind برای تم دارک */
+        .dark-theme {
+            background-color: #1a202c; /* bg-gray-900 */
+            color: #e2e8f0; /* text-gray-200 */
         }
-        h1, h2, h3 {
-            color: #bb86fc;
-            border-bottom: 2px solid #373737;
-            padding-bottom: 10px;
+        .dark-container {
+            background-color: #2d3748; /* bg-gray-800 */
+            border: 1px solid #4a5568; /* border-gray-700 */
         }
-        h1 {
-            text-align: center;
-            font-size: 2.5rem;
+        .dark-h1 {
+            color: #9f7aea; /* text-purple-400 */
+            border-bottom-color: #4a5568; /* border-gray-700 */
         }
-        h2 {
-            font-size: 2rem;
-            margin-top: 2rem;
+        .dark-h2 {
+            color: #63b3ed; /* text-blue-400 */
+            border-bottom-color: #4a5568; /* border-gray-700 */
         }
-        h3 {
-            font-size: 1.5rem;
-            color: #03dac6;
-            border-bottom: none;
+        .dark-h3 {
+            color: #4fd1c5; /* text-teal-400 */
         }
-        pre {
-            background-color: #2c2c2c;
-            border: 1px solid #444;
-            padding: 1em;
-            border-radius: 5px;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            direction: ltr;
+        .dark-pre {
+            background-color: #2c313d; /* یک خاکستری تیره‌تر برای بلوک کد */
+            border: 1px solid #4a5568; /* border-gray-600 */
+            direction: ltr; /* کدها معمولا چپ‌چین هستند */
             text-align: left;
         }
-        code {
+        .dark-code {
             font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 0.95em;
         }
-        strong {
-            color: #fdd835;
+        .dark-strong {
+            color: #f6e05e; /* text-yellow-400 */
         }
-        .note {
-            background-color: #332211;
-            border-left: 5px solid #ffab40;
-            padding: 1em;
-            margin: 1.5em 0;
-            border-radius: 5px;
+        .dark-note {
+            background-color: #322619; /* یک قهوه‌ای/نارنجی تیره */
+            border-left-color: #f6ad55; /* border-orange-400 */
+            border-right-width: 5px; /* برای نمایش در سمت راست در حالت RTL */
+            border-left-width: 0;
         }
-        .note strong {
-            color: #ffab40;
+        .dark-note-strong {
+             color: #f6ad55; /* text-orange-400 */
+        }
+        .dark-link {
+            color: #63b3ed; /* text-blue-400 */
+        }
+        .dark-link:hover {
+            color: #90cdf4; /* text-blue-300 */
+        }
+        /* استایل برای راست‌چین کردن لیست‌ها */
+        ul, ol {
+            padding-right: 20px; /* اضافه کردن پدینگ به سمت راست برای لیست‌ها */
+            padding-left: 0;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>مستندات کدهای C# برای امتحان</h1>
-        <p>این صفحه شامل توضیحات متدها و مفاهیم استفاده شده در تصاویر کد برای کار با فایل‌ها، پوشه‌ها و فرم در C# می‌باشد.</p>
+<body class="dark-theme">
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-4xl dark-container rounded-lg shadow-xl my-5">
+        <header class="mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-center mb-6 pb-3 border-b-2 dark-h1">
+                راهنمای جامع C# برای مبتدیان: کار با فایل‌ها، پوشه‌ها و فرم‌ها
+            </h1>
+            <p class="text-lg text-center">
+                سلام! برنامه‌نویسی مثل ساختن یک خانه با قطعات لگو است. هر دستوری که یاد می‌گیری، یک قطعه لگوی جدید به جعبه ابزارت اضافه می‌کنه. در این راهنما، با هم یاد می‌گیریم چطور با فایل‌ها (دفترچه‌های یادداشت دیجیتالی)، پوشه‌ها (قفسه‌های این دفترچه‌ها) و اجزای فرم برنامه (مثل دکمه‌ها و جعبه‌های متن) در زبان C# کار کنیم.
+            </p>
+        </header>
 
-        <h2>۱. کار با فایل‌های متنی (File I/O)</h2>
-        <p>این متدها برای خواندن و نوشتن متن در فایل‌ها استفاده می‌شوند و در فضای نام <strong>System.IO</strong> قرار دارند.</p>
+        <section class="mb-10">
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 pb-2 border-b dark-h2">
+                🎬 شروع کار: معرفی <code>System.IO</code>
+            </h2>
+            <p class="mb-4">
+                هر وقت بخواهیم با فایل‌ها یا پوشه‌ها کار کنیم، باید اول به برنامه‌مان بگوییم که از ابزارهای مخصوص این کار استفاده می‌کنیم. این ابزارها در یک جعبه ابزار بزرگ به نام <code>System.IO</code> قرار دارند. پس، بالای کدتان (جایی که بقیه <code>using</code> ها هستند) این خط را اضافه کنید:
+            </p>
+            <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">using System.IO; // این خط به برنامه می‌گوید که می‌خواهیم از دستورات مربوط به فایل و پوشه استفاده کنیم.
+using System.Windows.Forms; // برای کار با کنترل‌های فرم و پیغام‌ها
+using System; // برای ابزارهای عمومی مثل تاریخ و زمان</code></pre>
+        </section>
 
-        <h3>File.AppendAllText(string path, string contents)</h3>
-        <p><strong>توضیح:</strong> این متد یک رشته متنی را به انتهای یک فایل در مسیر مشخص شده اضافه می‌کند. اگر فایل وجود نداشته باشد، آن را ایجاد می‌کند.</p>
-        <pre><code>// اطلاعات چند TextBox با فرمت خاص (جدا شده با تب) به انتهای فایل info.txt اضافه می‌شود.
-string data = string.Format("{0}\t{1}\t{2}\t{3}\r\n", textBox1.Text, textBox2.Text, textBox3.Text, "");
-File.AppendAllText("info.txt", data);</code></pre>
+        <section class="mb-10">
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 pb-2 border-b dark-h2">
+                📂 بخش اول: کار با فایل‌های متنی (مثل یک دفترچه یادداشت جادویی)
+            </h2>
+            <p class="mb-4">
+                فایل‌های متنی (معمولاً با پسوند <code>.txt</code>) مثل دفترچه‌هایی هستند که می‌توانید در آن‌ها هر چیزی بنویسید، بخوانید یا به آن‌ها اضافه کنید.
+            </p>
 
-        <h3>File.ReadAllText(string path)</h3>
-        <p><strong>توضیح:</strong> این متد تمام محتوای یک فایل متنی را خوانده و به صورت یک رشته (string) برمی‌گرداند.</p>
-        <pre><code>// کل محتوای فایل info.txt را می‌خواند و در textBox5 نمایش می‌دهد.
-textBox5.Text = File.ReadAllText("info.txt");</code></pre>
-
-        <h3>File.WriteAllText(string path, string contents)</h3>
-        <p><strong>توضیح:</strong> این متد یک رشته متنی را در یک فایل می‌نویسد. اگر فایل از قبل وجود داشته باشد، <strong>تمام محتوای قبلی آن را پاک کرده</strong> و محتوای جدید را جایگزین می‌کند.</p>
-        <pre><code>// محتوای textBox1 را در فایلی که مسیرش در متغیر documentFilePath است، می‌نویسد.
-File.WriteAllText(documentFilePath, textBox1.Text);</code></pre>
-
-        <h2>۲. کار با پوشه‌ها (Directory)</h2>
-        <p>این متدها برای دسترسی به لیست فایل‌ها و پوشه‌ها داخل یک مسیر استفاده می‌شوند.</p>
-
-        <h3>Directory.GetDirectories(string path)</h3>
-        <p><strong>توضیح:</strong> لیستی از نام تمام <strong>پوشه‌های</strong> موجود در یک مسیر مشخص شده را برمی‌گرداند.</p>
-        <pre><code>// لیست تمام پوشه‌های درایو C را به listBox1 اضافه می‌کند.
-string directory = @"C:\";
-listBox1.Items.AddRange(Directory.GetDirectories(directory));</code></pre>
-
-        <h3>Directory.GetFiles(string path)</h3>
-        <p><strong>توضیح:</strong> لیستی از نام تمام <strong>فایل‌های</strong> موجود در یک مسیر مشخص شده را برمی‌گرداند.</p>
-        <pre><code>// لیست تمام فایل‌های درایو C را به listBox1 اضافه می‌کند.
-string directory = @"C:\";
-listBox1.Items.AddRange(Directory.GetFiles(directory));</code></pre>
-
-        <h2>۳. مدیریت فرم و کنترل‌ها</h2>
-        <p>این دستورات برای مدیریت خود فرم برنامه و کنترل‌های روی آن استفاده می‌شوند.</p>
-        <h3>this.Close()</h3>
-        <p>فرم فعلی برنامه را می‌بندد.</p>
-        <h3>Control.Clear()</h3>
-        <p>محتوای یک کنترل را پاک می‌کند (متن TextBox یا آیتم‌های ListBox).</p>
-
-        <div class="note">
-            <h3>⭐️ نکته مهم و تصحیح کد</h3>
-            <p>در کد مربوط به باز کردن فایل (<strong>openToolStripMenuItem_Click</strong>) یک اشتباه رایج وجود دارد. کد به جای خواندن فایل، محتوای TextBox را در فایل می‌نویسد.</p>
-            <p><strong>کد صحیح باید به شکل زیر باشد:</strong></p>
-            <pre><code>private void openToolStripMenuItem_Click(object sender, EventArgs e)
+            <article class="mb-6">
+                <h3 class="text-xl sm:text-2xl font-medium mb-3 dark-h3">۱. نوشتن متن جدید در فایل (پاک کردن محتوای قبلی) با <code>File.WriteAllText</code></h3>
+                <p class="mb-2">این دستور مثل این است که یک صفحه سفید از دفترچه بردارید و متن جدیدتان را از اول در آن بنویسید. اگر قبلاً چیزی در آن صفحه نوشته شده باشد، پاک می‌شود!</p>
+                <p class="mb-2"><strong class="dark-strong">کِی استفاده کنیم؟</strong> وقتی می‌خواهید اطلاعات جدیدی را ذخیره کنید و اطلاعات قبلی دیگر مهم نیستند. مثلاً وقتی کاربر تنظیمات جدیدی را برای برنامه انتخاب می‌کند.</p>
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال ۱: ذخیره یک پیام خوشامدگویی</h4>
+                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک یک دکمه به نام btnSaveWelcome
+private void btnSaveWelcome_Click(object sender, EventArgs e)
 {
-    if (openFileDialog1.ShowDialog() == DialogResult.OK)
+    string welcomeMessage = "سلام به برنامه من! خوش آمدید.";
+    // فایل "welcome.txt" در کنار فایل اجرایی برنامه ایجاد یا بازنویسی می‌شود.
+    File.WriteAllText("welcome.txt", welcomeMessage);
+    MessageBox.Show("پیام خوشامدگویی با موفقیت ذخیره شد.");
+}</code></pre>
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال ۲: ذخیره یادداشت کاربر از یک TextBox</h4>
+                <p class="mb-2">فرض کنید یک <code>TextBox</code> به نام <code>txtUserNote</code> و یک <code>Button</code> به نام <code>btnSaveNote</code> دارید.</p>
+                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک دکمه btnSaveNote
+private void btnSaveNote_Click(object sender, EventArgs e)
+{
+    string note = txtUserNote.Text; // متنی که کاربر نوشته
+    if (string.IsNullOrWhiteSpace(note))
     {
-        // مسیر فایل انتخاب شده را در متغیر ذخیره می‌کنیم
-        documentFilePath = openFileDialog1.FileName;
-        // محتوای فایل را می‌خوانیم و در TextBox نمایش می‌دهیم
-        textBox1.Text = File.ReadAllText(documentFilePath);
+        MessageBox.Show("لطفاً ابتدا یک یادداشت بنویسید.", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        return; // از ادامه اجرای متد جلوگیری می‌کند چون یادداشت خالی است
+    }
+    File.WriteAllText("MyPersonalNote.txt", note);
+    MessageBox.Show("یادداشت شما در فایل MyPersonalNote.txt ذخیره شد.");
+}</code></pre>
+            </article>
+
+            <article class="mb-6">
+                <h3 class="text-xl sm:text-2xl font-medium mb-3 dark-h3">۲. اضافه کردن متن به انتهای فایل (بدون پاک کردن محتوای قبلی) با <code>File.AppendAllText</code></h3>
+                <p class="mb-2">این دستور مثل این است که به انتهای یادداشت‌های قبلی‌تان در دفترچه، یک مطلب جدید اضافه کنید. نوشته‌های قبلی دست‌نخورده باقی می‌مانند.</p>
+                <p class="mb-2"><strong class="dark-strong">کِی استفاده کنیم؟</strong> برای ثبت گزارش کارها (لاگ)، ذخیره لیست خرید، یا هر جایی که می‌خواهید اطلاعات جدید به اطلاعات قبلی اضافه شوند.</p>
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال ۱: اضافه کردن آیتم به لیست خرید</h4>
+                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک یک دکمه به نام btnAddToShoppingList
+private void btnAddToShoppingList_Click(object sender, EventArgs e)
+{
+    string newItem = "شیر ۲ لیتر";
+    // Environment.NewLine باعث می‌شود هر آیتم در یک خط جدید نوشته شود.
+    File.AppendAllText("ShoppingList.txt", newItem + Environment.NewLine);
+    MessageBox.Show($"'{newItem}' به لیست خرید اضافه شد.");
+}</code></pre>
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال ۲: ثبت ورود کاربر به برنامه (لاگ ساده)</h4>
+                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد Load فرم اصلی برنامه
+private void MainForm_Load(object sender, EventArgs e)
+{
+    string logEntry = $"کاربر در تاریخ {DateTime.Now.ToShortDateString()} ساعت {DateTime.Now.ToShortTimeString()} وارد برنامه شد." + Environment.NewLine;
+    File.AppendAllText("ActivityLog.txt", logEntry);
+}</code></pre>
+                <p class="mt-2">این کد هر بار که برنامه اجرا می‌شود، یک خط به فایل <code>ActivityLog.txt</code> اضافه می‌کند.</p>
+            </article>
+
+            <article class="mb-6">
+                <h3 class="text-xl sm:text-2xl font-medium mb-3 dark-h3">۳. خواندن تمام محتوای یک فایل با <code>File.ReadAllText</code></h3>
+                <p class="mb-2">این دستور کل متن یک فایل را از اول تا آخر می‌خواند و به شما می‌دهد.</p>
+                <p class="mb-2"><strong class="dark-strong">کِی استفاده کنیم؟</strong> وقتی می‌خواهید تمام محتوای یک فایل را یکجا ببینید یا پردازش کنید. مثلاً برای بارگذاری یک یادداشت ذخیره شده.</p>
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال ۱: خواندن پیام خوشامدگویی</h4>
+                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک یک دکمه به نام btnShowWelcome
+private void btnShowWelcome_Click(object sender, EventArgs e)
+{
+    if (File.Exists("welcome.txt")) // اول چک می‌کنیم فایل وجود دارد یا نه
+    {
+        string message = File.ReadAllText("welcome.txt");
+        MessageBox.Show(message, "پیام خوشامدگویی");
+    }
+    else
+    {
+        MessageBox.Show("فایل پیام خوشامدگویی پیدا نشد!", "خطا");
     }
 }</code></pre>
-        </div>
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال ۲: بارگذاری یادداشت کاربر در یک TextBox</h4>
+                <p class="mb-2">فرض کنید یک <code>TextBox</code> به نام <code>txtUserNote</code> و یک <code>Button</code> به نام <code>btnLoadNote</code> دارید.</p>
+                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک دکمه btnLoadNote
+private void btnLoadNote_Click(object sender, EventArgs e)
+{
+    if (File.Exists("MyPersonalNote.txt"))
+    {
+        txtUserNote.Text = File.ReadAllText("MyPersonalNote.txt");
+        MessageBox.Show("یادداشت بارگذاری شد.");
+    }
+    else
+    {
+        MessageBox.Show("هیچ یادداشتی برای بارگذاری وجود ندارد.", "اطلاع");
+        txtUserNote.Text = ""; // اگر فایلی نیست، تکست‌باکس را خالی می‌کنیم
+    }
+}</code></pre>
+            </article>
 
+            <article class="mb-6">
+                <h3 class="text-xl sm:text-2xl font-medium mb-3 dark-h3">۴. خواندن خط به خط یک فایل با <code>File.ReadAllLines</code></h3>
+                <p class="mb-2">گاهی اوقات نمی‌خواهید کل متن را یکجا بگیرید، بلکه می‌خواهید هر خط از فایل را جداگانه داشته باشید. این دستور هر خط از فایل را به عنوان یک آیتم در یک لیست (آرایه) از رشته‌ها به شما می‌دهد.</p>
+                <p class="mb-2"><strong class="dark-strong">کِی استفاده کنیم؟</strong> وقتی هر خط از فایل یک داده جداگانه است. مثلاً لیست اسامی، لیست کارها و...</p>
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال: نمایش لیست خرید در یک <code>ListBox</code></h4>
+                <p class="mb-2">فرض کنید یک <code>ListBox</code> به نام <code>lstShopping</code> و یک دکمه <code>btnLoadShoppingList</code> دارید.</p>
+                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک دکمه btnLoadShoppingList
+private void btnLoadShoppingList_Click(object sender, EventArgs e)
+{
+    lstShopping.Items.Clear(); // اول لیست‌باکس را پاک می‌کنیم
+    if (File.Exists("ShoppingList.txt"))
+    {
+        string[] items = File.ReadAllLines("ShoppingList.txt");
+        // تمام آیتم‌های خوانده شده از فایل را به لیست‌باکس اضافه می‌کنیم
+        lstShopping.Items.AddRange(items);
+        MessageBox.Show("لیست خرید بارگذاری شد.");
+    }
+    else
+    {
+        MessageBox.Show("فایل لیست خرید پیدا نشد.");
+    }
+}</code></pre>
+            </article>
+
+            <article class="mb-6">
+                <h3 class="text-xl sm:text-2xl font-medium mb-3 dark-h3">۵. بررسی وجود یک فایل با <code>File.Exists</code></h3>
+                <p class="mb-2">قبل از اینکه بخواهید فایلی را بخوانید یا در آن چیزی بنویسید (مخصوصاً اگر نمی‌خواهید فایل جدیدی ایجاد شود)، بهتر است اول چک کنید که آیا آن فایل اصلاً وجود دارد یا نه. این دستور به شما <code>true</code> (بله، وجود دارد) یا <code>false</code> (نه، وجود ندارد) برمی‌گرداند.</p>
+                <p class="mb-2"><strong class="dark-strong">کِی استفاده کنیم؟</strong> تقریباً همیشه قبل از خواندن فایل، یا قبل از نوشتن اگر نمی‌خواهید فایل جدیدی بسازید.</p>
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال: چک کردن قبل از حذف (مثال پیشرفته‌تر)</h4>
+                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک یک دکمه به نام btnDeleteLog
+private void btnDeleteLog_Click(object sender, EventArgs e)
+{
+    string logFilePath = "ActivityLog.txt";
+    if (File.Exists(logFilePath))
+    {
+        DialogResult result = MessageBox.Show("آیا مطمئن هستید که می‌خواهید فایل گزارش را حذف کنید؟",
+                                            "تایید حذف",
+                                            MessageBoxButtons.YesNo,
+                                            MessageBoxIcon.Warning);
+        if (result == DialogResult.Yes)
+        {
+            File.Delete(logFilePath); // دستور حذف فایل
+            MessageBox.Show("فایل گزارش با موفقیت حذف شد.");
+        }
+        else
+        {
+            MessageBox.Show("عملیات حذف لغو شد.");
+        }
+    }
+    else
+    {
+        MessageBox.Show("فایل گزارشی برای حذف وجود ندارد.");
+    }
+}</code></pre>
+            </article>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 pb-2 border-b dark-h2">
+                🗂️ بخش دوم: کار با پوشه‌ها (قفسه‌های فایل‌ها)
+            </h2>
+            <p class="mb-4">
+                پوشه‌ها (یا دایرکتوری‌ها) به ما کمک می‌کنند فایل‌هایمان را مرتب کنیم. با C# می‌توانیم لیست فایل‌ها یا پوشه‌های داخل یک پوشه دیگر را بگیریم.
+            </p>
+            <article class="mb-6">
+                <h3 class="text-xl sm:text-2xl font-medium mb-3 dark-h3">۱. گرفتن لیست پوشه‌های داخل یک پوشه با <code>Directory.GetDirectories</code></h3>
+                <p class="mb-2">این دستور آدرس تمام <strong>پوشه‌هایی</strong> که مستقیماً داخل یک مسیر مشخص هستند را به شما می‌دهد.</p>
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال: نمایش پوشه‌های درایو C در یک <code>ListBox</code></h4>
+                <p class="mb-2">فرض کنید یک <code>ListBox</code> به نام <code>lstFoldersOnC</code> و یک دکمه <code>btnListCDriveFolders</code> دارید.</p>
+                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک دکمه btnListCDriveFolders
+private void btnListCDriveFolders_Click(object sender, EventArgs e)
+{
+    lstFoldersOnC.Items.Clear();
+    string drivePath = "C:\\"; // مسیر درایو C
+                                // علامت @ هم می‌توانستیم بگذاریم: @"C:\"
+
+    if (Directory.Exists(drivePath)) // چک می‌کنیم که درایو C وجود دارد
+    {
+        string[] folderPaths = Directory.GetDirectories(drivePath);
+        foreach (string folderPath in folderPaths)
+        {
+            // فقط نام پوشه را استخراج و اضافه می‌کنیم (نه کل مسیر)
+            lstFoldersOnC.Items.Add(Path.GetFileName(folderPath));
+        }
+    }
+    else
+    {
+        MessageBox.Show("درایو C پیدا نشد!");
+    }
+}</code></pre>
+                <p class="mt-2"><strong class="dark-strong">نکته:</strong> <code>Path.GetFileName(folderPath)</code> از <code>System.IO</code> می‌آید و فقط نام پوشه (یا فایل) را از کل مسیر جدا می‌کند.</p>
+            </article>
+
+            <article class="mb-6">
+                <h3 class="text-xl sm:text-2xl font-medium mb-3 dark-h3">۲. گرفتن لیست فایل‌های داخل یک پوشه با <code>Directory.GetFiles</code></h3>
+                <p class="mb-2">این دستور آدرس تمام <strong>فایل‌هایی</strong> که مستقیماً داخل یک مسیر مشخص هستند را به شما می‌دهد.</p>
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال: نمایش فایل‌های پوشه "My Documents" در یک <code>ListBox</code></h4>
+                <p class="mb-2">فرض کنید یک <code>ListBox</code> به نام <code>lstMyDocumentsFiles</code> و یک دکمه <code>btnListMyDocsFiles</code> دارید.</p>
+                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک دکمه btnListMyDocsFiles
+private void btnListMyDocsFiles_Click(object sender, EventArgs e)
+{
+    lstMyDocumentsFiles.Items.Clear();
+    // گرفتن مسیر پوشه My Documents کاربر فعلی
+    string myDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+    if (Directory.Exists(myDocumentsPath))
+    {
+        // گرفتن تمام فایل‌ها (نه پوشه‌ها)
+        string[] filePaths = Directory.GetFiles(myDocumentsPath);
+        foreach (string filePath in filePaths)
+        {
+            lstMyDocumentsFiles.Items.Add(Path.GetFileName(filePath));
+        }
+
+        // می‌توانیم نوع خاصی از فایل‌ها را هم بگیریم:
+        // string[] textFiles = Directory.GetFiles(myDocumentsPath, "*.txt"); // فقط فایل‌های متنی
+        // lstMyDocumentsFiles.Items.AddRange(textFiles);
+    }
+    else
+    {
+        MessageBox.Show("پوشه My Documents پیدا نشد!");
+    }
+}</code></pre>
+            </article>
+
+            <article class="mb-6">
+                <h3 class="text-xl sm:text-2xl font-medium mb-3 dark-h3">۳. بررسی وجود یک پوشه با <code>Directory.Exists</code></h3>
+                <p class="mb-2">مشابه <code>File.Exists</code>، این دستور چک می‌کند که آیا یک پوشه در مسیر داده شده وجود دارد یا نه.</p>
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال: ایجاد یک پوشه اگر وجود نداشته باشد</h4>
+                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک یک دکمه به نام btnCreateBackupFolder
+private void btnCreateBackupFolder_Click(object sender, EventArgs e)
+{
+    string backupFolderPath = @"C:\MyAppBackups"; // @ باعث می‌شود \ را معمولی در نظر بگیرد
+
+    if (!Directory.Exists(backupFolderPath)) // اگر پوشه وجود *ندارد*
+    {
+        Directory.CreateDirectory(backupFolderPath); // پوشه را ایجاد کن
+        MessageBox.Show($"پوشه '{backupFolderPath}' با موفقیت ایجاد شد.");
+    }
+    else
+    {
+        MessageBox.Show($"پوشه '{backupFolderPath}' از قبل وجود دارد.");
+    }
+}</code></pre>
+            </article>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 pb-2 border-b dark-h2">
+                🖥️ بخش سوم: مدیریت فرم و کنترل‌ها (اجزای برنامه)
+            </h2>
+            <p class="mb-4">
+                کنترل‌ها اجزای دیداری برنامه شما هستند: دکمه‌ها، جعبه‌های متن، لیست‌ها و...
+            </p>
+            <article class="mb-6">
+                <h3 class="text-xl sm:text-2xl font-medium mb-3 dark-h3">۱. بستن فرم فعلی با <code>this.Close()</code></h3>
+                <p class="mb-2">این دستور فرمی که در آن قرار دارید (و این کد در آن نوشته شده) را می‌بندد. اگر فرم اصلی برنامه باشد، کل برنامه بسته می‌شود.</p>
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال: دکمه خروج</h4>
+                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک یک دکمه به نام btnExitApp
+private void btnExitApp_Click(object sender, EventArgs e)
+{
+    DialogResult confirmExit = MessageBox.Show("آیا مطمئن هستید که می‌خواهید از برنامه خارج شوید؟",
+                                             "تایید خروج",
+                                             MessageBoxButtons.YesNo,
+                                             MessageBoxIcon.Question);
+    if (confirmExit == DialogResult.Yes)
+    {
+        this.Close(); // فرم فعلی (و در نتیجه برنامه اگر فرم اصلی باشد) بسته می‌شود
+    }
+}</code></pre>
+            </article>
+
+            <article class="mb-6">
+                <h3 class="text-xl sm:text-2xl font-medium mb-3 dark-h3">۲. پاک کردن محتوای کنترل‌ها</h3>
+                <ul class="list-disc pr-5 mb-2">
+                    <li><strong class="dark-strong"><code>TextBox.Clear()</code> یا <code>TextBox.Text = "";</code></strong>: متن داخل یک جعبه متن را پاک می‌کند.</li>
+                    <li><strong class="dark-strong"><code>ListBox.Items.Clear()</code></strong>: تمام آیتم‌های داخل یک لیست‌باکس را پاک می‌کند.</li>
+                </ul>
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال: دکمه "شروع مجدد" یا "پاک کردن فرم"</h4>
+                <p class="mb-2">فرض کنید فرمی با چند <code>TextBox</code> (مثلاً <code>txtName</code>, <code>txtFamily</code>, <code>txtAge</code>) و یک <code>ListBox</code> (مثلاً <code>lstHobbies</code>) دارید.</p>
+                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک یک دکمه به نام btnReset
+private void btnReset_Click(object sender, EventArgs e)
+{
+    txtName.Clear();    // یا txtName.Text = "";
+    txtFamily.Clear();  // یا txtFamily.Text = string.Empty;
+    txtAge.Text = "";   // برای پاک کردن
+
+    lstHobbies.Items.Clear();
+
+    MessageBox.Show("تمام فیلدها پاک شدند.");
+    txtName.Focus(); // فوکوس را به اولین تکست‌باکس برمی‌گرداند
+}</code></pre>
+            </article>
+
+            <article class="mb-6">
+                <h3 class="text-xl sm:text-2xl font-medium mb-3 dark-h3">۳. کار با <code>ListBox</code></h3>
+                <ul class="list-disc pr-5 mb-2">
+                    <li><strong class="dark-strong"><code>ListBox.Items.Add(item)</code></strong>: یک آیتم جدید به انتهای لیست‌باکس اضافه می‌کند.</li>
+                    <li><strong class="dark-strong"><code>ListBox.Items.AddRange(collection)</code></strong>: یک مجموعه از آیتم‌ها (مثلاً یک آرایه از رشته‌ها) را یکجا به لیست‌باکس اضافه می‌کند.</li>
+                    <li><strong class="dark-strong"><code>ListBox.SelectedItem</code></strong>: آیتمی که کاربر انتخاب کرده را برمی‌گرداند.</li>
+                    <li><strong class="dark-strong"><code>ListBox.SelectedIndex</code></strong>: شماره (اندیس) آیتمی که کاربر انتخاب کرده را برمی‌گرداند (از صفر شروع می‌شود). اگر چیزی انتخاب نشده باشد، مقدارش 1- است.</li>
+                </ul>
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال کامل: یک لیست کارها (To-Do List) ساده</h4>
+                <p class="mb-2">فرض کنید یک <code>TextBox</code> به نام <code>txtNewTask</code>، یک <code>Button</code> به نام <code>btnAddTask</code>، یک <code>ListBox</code> به نام <code>lstTasks</code> و یک <code>Button</code> دیگر به نام <code>btnRemoveTask</code> دارید.</p>
+                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک دکمه btnAddTask
+private void btnAddTask_Click(object sender, EventArgs e)
+{
+    string task = txtNewTask.Text;
+    if (!string.IsNullOrWhiteSpace(task))
+    {
+        lstTasks.Items.Add(task); // اضافه کردن کار جدید به لیست
+        txtNewTask.Clear();       // پاک کردن تکست‌باکس
+        txtNewTask.Focus();       // آماده برای کار بعدی
+    }
+    else
+    {
+        MessageBox.Show("لطفاً نام کار را وارد کنید.");
+    }
+}
+
+// در رویداد کلیک دکمه btnRemoveTask
+private void btnRemoveTask_Click(object sender, EventArgs e)
+{
+    // چک می‌کنیم که آیا آیتمی انتخاب شده است
+    if (lstTasks.SelectedIndex != -1) // یعنی یک آیتم انتخاب شده
+    {
+        // آیتم انتخاب شده را حذف می‌کنیم
+        lstTasks.Items.RemoveAt(lstTasks.SelectedIndex);
+    }
+    else
+    {
+        MessageBox.Show("لطفاً ابتدا یک کار را از لیست انتخاب کنید.");
+    }
+}
+
+// (اختیاری) نمایش جزئیات آیتم انتخاب شده با دوبار کلیک
+private void lstTasks_DoubleClick(object sender, EventArgs e)
+{
+    if (lstTasks.SelectedItem != null)
+    {
+        MessageBox.Show($"شما روی کار زیر دوبار کلیک کردید: \n{lstTasks.SelectedItem.ToString()}", "جزئیات کار");
+    }
+}</code></pre>
+            </article>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 pb-2 border-b dark-h2">
+                💬 بخش چهارم: دیالوگ‌های فایل (پنجره‌های انتخاب فایل)
+            </h2>
+            <p class="mb-4">
+                به جای اینکه کاربر مجبور باشد آدرس دقیق یک فایل را تایپ کند، می‌توانید از پنجره‌های استاندارد ویندوز برای انتخاب فایل (برای باز کردن) یا تعیین نام و مسیر (برای ذخیره کردن) استفاده کنید.
+            </p>
+
+            <article class="mb-6">
+                <h3 class="text-xl sm:text-2xl font-medium mb-3 dark-h3">۱. دیالوگ ذخیره فایل (<code>SaveFileDialog</code>)</h3>
+                <p class="mb-2">این کنترل یک پنجره "Save As" را به کاربر نشان می‌دهد.</p>
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">نحوه استفاده:</h4>
+                <ol class="list-decimal pr-5 mb-2">
+                    <li>یک <code>SaveFileDialog</code> از جعبه ابزار به فرمتان بکشید (یا با کد ایجاد کنید).</li>
+                    <li>قبل از نمایش، می‌توانید ویژگی <code>Filter</code> آن را تنظیم کنید تا فقط انواع خاصی از فایل‌ها نشان داده شوند.</li>
+                    <li>با <code>ShowDialog()</code> آن را نمایش دهید.</li>
+                    <li>اگر کاربر دکمه "Save" را زد، <code>ShowDialog()</code> مقدار <code>DialogResult.OK</code> را برمی‌گرداند.</li>
+                    <li>آدرس کامل فایلی که کاربر انتخاب کرده در ویژگی <code>FileName</code> قرار می‌گیرد.</li>
+                </ol>
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال کامل: ذخیره محتوای یک <code>TextBox</code> با نام <code>txtArticle</code></h4>
+                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک یک دکمه به نام btnSaveArticle
+private void btnSaveArticle_Click(object sender, EventArgs e)
+{
+    SaveFileDialog saveDialog = new SaveFileDialog();
+    saveDialog.Title = "ذخیره مقاله شما"; // عنوان پنجره
+    saveDialog.Filter = "فایل متنی (*.txt)|*.txt|فایل Word (*.docx)|*.docx|همه فایل‌ها (*.*)|*.*";
+    saveDialog.DefaultExt = "txt"; // پسوند پیش‌فرض اگر کاربر وارد نکرد
+    saveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // از کجا شروع شود
+    saveDialog.FileName = "مقاله_من.txt"; // نام پیش‌فرض فایل
+
+    if (saveDialog.ShowDialog() == DialogResult.OK)
+    {
+        string filePath = saveDialog.FileName; // آدرس کامل فایل
+        try
+        {
+            File.WriteAllText(filePath, txtArticle.Text);
+            MessageBox.Show("مقاله با موفقیت در مسیر زیر ذخیره شد:\n" + filePath, "ذخیره موفق");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("خطا در ذخیره فایل: " + ex.Message, "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+    else
+    {
+        MessageBox.Show("عملیات ذخیره لغو شد.");
+    }
+}</code></pre>
+            </article>
+
+            <article class="mb-6">
+                <h3 class="text-xl sm:text-2xl font-medium mb-3 dark-h3">۲. دیالوگ باز کردن فایل (<code>OpenFileDialog</code>)</h3>
+                <p class="mb-2">این کنترل یک پنجره "Open" را به کاربر نشان می‌دهد تا یک یا چند فایل را انتخاب کند.</p>
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">نحوه استفاده:</h4>
+                <p class="mb-2">مشابه <code>SaveFileDialog</code> است، فقط برای باز کردن فایل استفاده می‌شود.</p>
+                <h4 class="text-lg font-medium mt-3 mb-2 dark-strong">مثال کامل: باز کردن یک فایل متنی و نمایش محتوای آن در <code>TextBox</code> با نام <code>txtArticle</code></h4>
+                <pre class="dark-pre p-4 rounded-md overflow-x-auto"><code class="dark-code text-sm">// در رویداد کلیک یک دکمه به نام btnOpenArticle
+private void btnOpenArticle_Click(object sender, EventArgs e)
+{
+    OpenFileDialog openDialog = new OpenFileDialog();
+    openDialog.Title = "باز کردن مقاله";
+    openDialog.Filter = "فایل متنی (*.txt)|*.txt|همه فایل‌ها (*.*)|*.*";
+    openDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+    // openDialog.Multiselect = true; // اگر می‌خواهید کاربر بتواند چند فایل انتخاب کند
+
+    if (openDialog.ShowDialog() == DialogResult.OK)
+    {
+        string filePath = openDialog.FileName; // آدرس فایل انتخاب شده
+        // string[] selectedFiles = openDialog.FileNames; // اگر Multiselect فعال باشد
+
+        try
+        {
+            txtArticle.Text = File.ReadAllText(filePath);
+            MessageBox.Show("مقاله با موفقیت از مسیر زیر باز شد:\n" + filePath, "باز کردن موفق");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("خطا در باز کردن فایل: " + ex.Message, "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+    else
+    {
+        MessageBox.Show("عملیات باز کردن فایل لغو شد.");
+    }
+}</code></pre>
+            </article>
+        </section>
+
+        <footer class="mt-12 pt-6 border-t-2 dark-h1 text-center">
+            <p>امیدوارم این توضیحات مفصل و مثال‌های بیشتر به شما کمک کند تا این مفاهیم را بهتر درک کنید. بهترین راه یادگیری، ساختن پروژه‌های کوچک و امتحان کردن این کدها در عمل است. موفق باشید!</p>
+        </footer>
     </div>
 </body>
 </html>
