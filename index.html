@@ -1,344 +1,135 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أسئلة الكتاب العربي مع الترجمة الفارسية</title>
+    <title>مستندات کد C#</title>
     <style>
-        :root {
-            --primary: #bb86fc;
-            --secondary: #03dac6;
-            --background: #121212;
-            --surface: #1e1e1e;
-            --text: #e0e0e0;
-            --text-secondary: #cfd8dc;
-        }
         body {
-            font-family: 'Arial', sans-serif;
-            background: var(--background);
-            color: var(--text);
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Tahoma', 'Vazirmatn', sans-serif;
+            line-height: 1.8;
             margin: 0;
-            padding: 20px;
-            line-height: 1.6;
+            padding: 0;
         }
         .container {
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            border: 1px solid #333;
         }
-        h1 {
-            color: var(--primary);
-            text-align: center;
-            border-bottom: 1px solid #333;
+        h1, h2, h3 {
+            color: #bb86fc;
+            border-bottom: 2px solid #373737;
             padding-bottom: 10px;
         }
-        .qa-section {
-            background: var(--surface);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
         }
-        .question {
-            color: var(--secondary);
-            font-weight: bold;
-            margin-bottom: 10px;
+        h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
         }
-        .answer {
-            color: var(--text-secondary);
-            padding-right: 15px;
+        h3 {
+            font-size: 1.5rem;
+            color: #03dac6;
+            border-bottom: none;
         }
-        .page-number {
-            color: var(--primary);
-            font-size: 0.9em;
-            margin-top: 5px;
+        pre {
+            background-color: #2c2c2c;
+            border: 1px solid #444;
+            padding: 1em;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            direction: ltr;
             text-align: left;
         }
-        .conversation {
-            background: #2a2a2a;
-            padding: 10px;
+        code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+        strong {
+            color: #fdd835;
+        }
+        .note {
+            background-color: #332211;
+            border-left: 5px solid #ffab40;
+            padding: 1em;
+            margin: 1.5em 0;
             border-radius: 5px;
-            margin: 10px 0;
-            border-right: 3px solid var(--primary);
         }
-        .speaker {
-            color: var(--primary);
-            font-weight: bold;
-        }
-        .translation {
-            color: #888;
-            font-style: italic;
-            margin-top: 5px;
-            border-top: 1px dashed #444;
-            padding-top: 5px;
-        }
-        .original {
-            color: var(--text);
-        }
-        .language-tab {
-            display: inline-block;
-            padding: 5px 10px;
-            margin-left: 5px;
-            background: #333;
-            border-radius: 5px 5px 0 0;
-            cursor: pointer;
-        }
-        .language-tab.active {
-            background: var(--surface);
-            color: var(--secondary);
-        }
-        .language-content {
-            display: none;
-        }
-        .language-content.active {
-            display: block;
+        .note strong {
+            color: #ffab40;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>أسئلة الكتاب العربي مع الترجمة الفارسية</h1>
-        <div id="content"></div>
+        <h1>مستندات کدهای C# برای امتحان</h1>
+        <p>این صفحه شامل توضیحات متدها و مفاهیم استفاده شده در تصاویر کد برای کار با فایل‌ها، پوشه‌ها و فرم در C# می‌باشد.</p>
+
+        <h2>۱. کار با فایل‌های متنی (File I/O)</h2>
+        <p>این متدها برای خواندن و نوشتن متن در فایل‌ها استفاده می‌شوند و در فضای نام <strong>System.IO</strong> قرار دارند.</p>
+
+        <h3>File.AppendAllText(string path, string contents)</h3>
+        <p><strong>توضیح:</strong> این متد یک رشته متنی را به انتهای یک فایل در مسیر مشخص شده اضافه می‌کند. اگر فایل وجود نداشته باشد، آن را ایجاد می‌کند.</p>
+        <pre><code>// اطلاعات چند TextBox با فرمت خاص (جدا شده با تب) به انتهای فایل info.txt اضافه می‌شود.
+string data = string.Format("{0}\t{1}\t{2}\t{3}\r\n", textBox1.Text, textBox2.Text, textBox3.Text, "");
+File.AppendAllText("info.txt", data);</code></pre>
+
+        <h3>File.ReadAllText(string path)</h3>
+        <p><strong>توضیح:</strong> این متد تمام محتوای یک فایل متنی را خوانده و به صورت یک رشته (string) برمی‌گرداند.</p>
+        <pre><code>// کل محتوای فایل info.txt را می‌خواند و در textBox5 نمایش می‌دهد.
+textBox5.Text = File.ReadAllText("info.txt");</code></pre>
+
+        <h3>File.WriteAllText(string path, string contents)</h3>
+        <p><strong>توضیح:</strong> این متد یک رشته متنی را در یک فایل می‌نویسد. اگر فایل از قبل وجود داشته باشد، <strong>تمام محتوای قبلی آن را پاک کرده</strong> و محتوای جدید را جایگزین می‌کند.</p>
+        <pre><code>// محتوای textBox1 را در فایلی که مسیرش در متغیر documentFilePath است، می‌نویسد.
+File.WriteAllText(documentFilePath, textBox1.Text);</code></pre>
+
+        <h2>۲. کار با پوشه‌ها (Directory)</h2>
+        <p>این متدها برای دسترسی به لیست فایل‌ها و پوشه‌ها داخل یک مسیر استفاده می‌شوند.</p>
+
+        <h3>Directory.GetDirectories(string path)</h3>
+        <p><strong>توضیح:</strong> لیستی از نام تمام <strong>پوشه‌های</strong> موجود در یک مسیر مشخص شده را برمی‌گرداند.</p>
+        <pre><code>// لیست تمام پوشه‌های درایو C را به listBox1 اضافه می‌کند.
+string directory = @"C:\";
+listBox1.Items.AddRange(Directory.GetDirectories(directory));</code></pre>
+
+        <h3>Directory.GetFiles(string path)</h3>
+        <p><strong>توضیح:</strong> لیستی از نام تمام <strong>فایل‌های</strong> موجود در یک مسیر مشخص شده را برمی‌گرداند.</p>
+        <pre><code>// لیست تمام فایل‌های درایو C را به listBox1 اضافه می‌کند.
+string directory = @"C:\";
+listBox1.Items.AddRange(Directory.GetFiles(directory));</code></pre>
+
+        <h2>۳. مدیریت فرم و کنترل‌ها</h2>
+        <p>این دستورات برای مدیریت خود فرم برنامه و کنترل‌های روی آن استفاده می‌شوند.</p>
+        <h3>this.Close()</h3>
+        <p>فرم فعلی برنامه را می‌بندد.</p>
+        <h3>Control.Clear()</h3>
+        <p>محتوای یک کنترل را پاک می‌کند (متن TextBox یا آیتم‌های ListBox).</p>
+
+        <div class="note">
+            <h3>⭐️ نکته مهم و تصحیح کد</h3>
+            <p>در کد مربوط به باز کردن فایل (<strong>openToolStripMenuItem_Click</strong>) یک اشتباه رایج وجود دارد. کد به جای خواندن فایل، محتوای TextBox را در فایل می‌نویسد.</p>
+            <p><strong>کد صحیح باید به شکل زیر باشد:</strong></p>
+            <pre><code>private void openToolStripMenuItem_Click(object sender, EventArgs e)
+{
+    if (openFileDialog1.ShowDialog() == DialogResult.OK)
+    {
+        // مسیر فایل انتخاب شده را در متغیر ذخیره می‌کنیم
+        documentFilePath = openFileDialog1.FileName;
+        // محتوای فایل را می‌خوانیم و در TextBox نمایش می‌دهیم
+        textBox1.Text = File.ReadAllText(documentFilePath);
+    }
+}</code></pre>
+        </div>
+
     </div>
-
-    <script>
-        const qaData = [
-            {
-                page: 1,
-                question: {
-                    ar: "ما هي بعض الحرف البدوية المذكورة؟",
-                    fa: "چند نمونه از صنایع دستی بادیه نشینان را نام ببرید؟"
-                },
-                answer: {
-                    ar: "- التطوير<br>- صنع الأزهار<br>- صنع الماء من القربة<br>- صنع الغزل<br>- النسيج<br>- الفخار<br>- صناعة الخوص الرعاجي",
-                    fa: "- توسعه و بهبود<br>- ساخت گل‌ها<br>- ساخت آب از مشک<br>- ساخت نخ<br>- بافتنی<br>- سفالگری<br>- ساخت سبد از برگ خرما"
-                }
-            },
-            {
-                page: 2,
-                question: {
-                    ar: "ما هي طرق تسويق المنتجات؟",
-                    fa: "راه‌های بازاریابی محصولات را ذکر کنید."
-                },
-                answer: {
-                    ar: "۱. عرض صور المنتجات<br>۲. مشاهدة المنافسين<br>۳. التعرف على آراء الزبائن<br>۴. المشاركة في المعارض<br>۵. إنشاء علاقة تجارية خاصة",
-                    fa: "۱. نمایش تصاویر محصولات<br>۲. مشاهده رقبا<br>۳. آگاهی از نظرات مشتریان<br>۴. مشارکت در نمایشگاه‌ها<br>۵. ایجاد روابط تجاری خاص"
-                }
-            },
-            {
-                page: 3,
-                question: {
-                    ar: "ما معاني الكلمات التالية؟",
-                    fa: "معانی کلمات زیر چیست؟"
-                },
-                answer: {
-                    ar: "- <strong>قـف:</strong> شغال<br>- <strong>قـنون:</strong> قانون<br>- <strong>شــتــمــيــان:</strong> به‌دست‌آورندۀ دل<br>- <strong>شــطــر:</strong> ناقص<br>- <strong>مــكــســب:</strong> سود<br>- <strong>شــافــســيــن:</strong> رقیبان<br>- <strong>شــقــتــة:</strong> مینیاتور",
-                    fa: "- <strong>قـف:</strong> شغال (گرگ صحرایی)<br>- <strong>قـنون:</strong> قانون<br>- <strong>شــتــمــيــان:</strong> جلب کننده دل<br>- <strong>شــطــر:</strong> ناقص<br>- <strong>مــكــســب:</strong> سود<br>- <strong>شــافــســيــن:</strong> رقیبان<br>- <strong>شــقــتــة:</strong> مینیاتور"
-                }
-            },
-            {
-                page: 4,
-                question: {
-                    ar: "من هو المسؤول عن تنظيف الغرف في الفندق؟ وما هي المحادثة التي جرت؟",
-                    fa: "مسئول نظافت اتاق‌های هتل کیست؟ و گفتگوی مربوطه چیست؟"
-                },
-                answer: {
-                    ar: `
-                    <div class="conversation">
-                        <div><span class="speaker">الضيف:</span> من هو مسؤول تنظيف الغرف و الحفاظ عليها؟</div>
-                        <div><span class="speaker">الأستاذ الدمشقي:</span> ما هي المشكلة؟</div>
-                        <div><span class="speaker">الضيف:</span> أعتذر منك، رجاء استريخ: سأقوم بالمشرف.</div>
-                        <div><span class="speaker">الموظف:</span> تست غرفتي و غرف زملائي نظيفة، و فيها توافض.</div>
-                        <div><span class="speaker">الموظف:</span> في الغرفة الأولى سريز مكسور و في الغرفة الثانية شريف ناقص.</div>
-                        <div><span class="speaker">المشرف:</span> سيأتي خلال التنظيف، و ما المشكلات الأخرى؟</div>
-                        <div><span class="speaker">الموظف:</span> سأقوم بكل شيء بسرعة على عيني.</div>
-                    </div>
-                    <strong>الجواب:</strong> الأستاذ الدمشقي مشرف خدمات غرف الفندق`,
-                    fa: `
-                    <div class="conversation">
-                        <div><span class="speaker">مهمان:</span> مسئول نظافت اتاق‌ها و حفظ نظم آن‌ها کیست؟</div>
-                        <div><span class="speaker">استاد دمشقی (سرپرست خدمات اتاق‌های هتل):</span> مشکل چیست؟</div>
-                        <div><span class="speaker">مهمان:</span> عذر می‌خواهم، لطفاً استراحت کنید: من با سرپرست صحبت می‌کنم.</div>
-                        <div><span class="speaker">کارمند:</span> اتاق من و همکارانم تمیز است، اما مشکلاتی دارد.</div>
-                        <div><span class="speaker">کارمند:</span> در اتاق اول تخت شکسته و در اتاق دوم ملافه کم است.</div>
-                        <div><span class="speaker">سرپرست:</span> در حین نظافت می‌آید، مشکلات دیگر چیست؟</div>
-                        <div><span class="speaker">کارمند:</span> همه کارها را به سرعت انجام می‌دهم.</div>
-                    </div>
-                    <strong>پاسخ:</strong> استاد دمشقی سرپرست خدمات اتاق‌های هتل`
-                }
-            },
-            {
-                page: 5,
-                question: {
-                    ar: "كيف يصاغ الفعل المبني للمجهول في اللغة الفارسية والعربية؟",
-                    fa: "فعل مجهول در فارسی و عربی چگونه ساخته می‌شود؟"
-                },
-                answer: {
-                    ar: "- <strong>الفارسية:</strong> باستخدام \"شدن\" (مثال: زد → زده شد)<br>- <strong>العربية:</strong> بتغيير وزن الفعل (مثال: كَتَبَ → كُتِبَ)",
-                    fa: "- <strong>فارسی:</strong> با استفاده از \"شدن\" (مثال: زد → زده شد)<br>- <strong>عربی:</strong> با تغییر وزن فعل (مثال: کَتَبَ → کُتِبَ)"
-                }
-            },
-            {
-                page: 6,
-                question: {
-                    ar: "حدد الأفعال المبني للمجهول في الآيات التالية:",
-                    fa: "افعال مجهول را در آیات زیر شناسایی کنید."
-                },
-                answer: {
-                    ar: "١. <strong>يُتْلَى</strong> (سورة الأعراف الآية ٢٠٤)<br>٢. <strong>يُظْلَمُونَ</strong> (سورة مريم الآية ٦٠)<br>٣. <strong>خُلِقَتْ</strong> (سورة الغاشية الآية ١٧)",
-                    fa: "١. <strong>يُتْلَى</strong> (آیه ۲۰۴ سوره اعراف)<br>٢. <strong>يُظْلَمُونَ</strong> (آیه ۶۰ سوره مریم)<br>٣. <strong>خُلِقَتْ</strong> (آیه ۱۷ سوره غاشیه)"
-                }
-            },
-            {
-                page: 7,
-                question: {
-                    ar: "املأ الفراغات بالكلمات المناسبة:",
-                    fa: "کلمات مناسب را در جای خالی قرار دهید."
-                },
-                answer: {
-                    ar: "١. <strong>تُعْرَفُ</strong> الإبل <strong>بِسَفِينَةِ الصَّحْرَاءِ.</strong><br>٢. <strong>شَهْرُ رَمَضَانَ، شَهْرُ الصِّيَامِ.</strong><br>٣. <strong>أَنْصِتُوا</strong> لِلْأُسْتَاذِ.",
-                    fa: "١. <strong>شتر</strong> به کشتی صحرا معروف است.<br>٢. <strong>ماه رمضان</strong>، ماه عبادت و روزه است.<br>٣. لطفاً <strong>به استادی که با شما صحبت می‌کند گوش دهید</strong>."
-                }
-            },
-            {
-                page: 8,
-                question: {
-                    ar: "اختر الإجابة الصحيحة:",
-                    fa: "گزینه صحیح را انتخاب کنید."
-                },
-                answer: {
-                    ar: "- <strong>الكلمة الغريبة:</strong> مفتاح<br>- <strong>الفعل المبني للمجهول:</strong> يُكتَب<br>- <strong>معنى «قُتِلَ»:</strong> كُشِفَ<br>- <strong>صيغة الأمر من «تعلمون»:</strong> اعلموا",
-                    fa: "- <strong>کلمه غیرعربی:</strong> کلید<br>- <strong>فعل مجهول:</strong> نوشته می‌شود<br>- <strong>معنی «کشته شد»:</strong> به قتل رسید<br>- <strong>فرمان از «می‌دانید»:</strong> بدانید"
-                }
-            },
-            {
-                page: 9,
-                question: {
-                    ar: "ما هو الأوريغامي؟",
-                    fa: "اوریگامی چیست؟"
-                },
-                answer: {
-                    ar: "فن طي الورق لإنشاء أشكال جميلة تساعد على التركيز.",
-                    fa: "هنر تا کردن کاغذ برای ایجاد اشکال زیبا که به تمرکز کمک می‌کند."
-                }
-            },
-            {
-                page: 10,
-                question: {
-                    ar: "ما ترجمة الآية ٩٠ من سورة الأنعام؟",
-                    fa: "ترجمه آیه ۹۰ سوره انعام چیست؟"
-                },
-                answer: {
-                    ar: "\"الله فالق الحب والنوى، يخرج الحي من الميت ويخرج الميت من الحي.\"",
-                    fa: "\"خداوند شکافنده دانه و هسته است، زنده را از مرده بیرون می‌آورد و مرده را از زنده خارج می‌سازد.\""
-                }
-            },
-            {
-                page: "11-12",
-                question: {
-                    ar: "ما هي خصائص الأشجار العجيبة؟",
-                    fa: "ویژگی‌های درختان شگفت‌انگیز را ذکر کنید."
-                },
-                answer: {
-                    ar: "- <strong>شجرة السكويا:</strong> يزيد ارتفاعها عن ١٠٠ متر<br>- <strong>الشجرة الغانية:</strong> تعيش حياة طفيلية<br>- <strong>شجرة التين:</strong> ثمارها حلوة<br>- <strong>شجرة البلوط:</strong> تعيش طويلاً (٥٠٠ سنة)",
-                    fa: "- <strong>درخت سکویا:</strong> ارتفاع بیش از ۱۰۰ متر<br>- <strong>درخت انگلی:</strong> زندگی انگلی دارد<br>- <strong>درخت انجیر:</strong> میوه‌های شیرین<br>- <strong>درخت بلوط:</strong> عمر طولانی (۵۰۰ سال)"
-                }
-            },
-            {
-                page: 14,
-                question: {
-                    ar: "كيف تم حل مشكلة شحن الهاتف المحمول؟ وما هي المحادثة؟",
-                    fa: "مشکل شارژ تلفن همراه چگونه حل شد؟ و گفتگو چیست؟"
-                },
-                answer: {
-                    ar: `
-                    <div class="conversation">
-                        <div><span class="speaker">الزائر:</span> رجاءً، أعطيني شريحة الجوال.</div>
-                        <div><span class="speaker">الموظف:</span> تفضل، هل تريدين بطاقة الشحن؟</div>
-                        <div><span class="speaker">الزائر:</span> نعم؛ من فضلك أعطني بطاقة بمبلغ خمسة وعشرين ريالاً.</div>
-                        <div><span class="speaker">الزائر:</span> عفواً، في بطاقة الشحن إشكال. أعطيني البطاقة من فضلك.</div>
-                        <div><span class="speaker">الموظف:</span> سامحيني، أنت على الحق. أبدل لك البطاقة.</div>
-                    </div>
-                    <strong>الجواب:</strong> تم حل المشكلة باستبدال بطاقة الشحن المعيبة من قبل موظف الاتصالات`,
-                    fa: `
-                    <div class="conversation">
-                        <div><span class="speaker">مراجعه کننده:</span> لطفاً یک سیم‌کارت موبایل به من بدهید.</div>
-                        <div><span class="speaker">کارمند:</span> بفرمایید، آیا کارت شارژ هم می‌خواهید؟</div>
-                        <div><span class="speaker">مراجعه کننده:</span> بله؛ لطفاً یک کارت شارژ به مبلغ بیست و پنج ریال به من بدهید.</div>
-                        <div><span class="speaker">مراجعه کننده:</span> عذر می‌خواهم، در کارت شارژ مشکلی وجود دارد. لطفاً کارت را به من بدهید.</div>
-                        <div><span class="speaker">کارمند:</span> مرا ببخشید، حق با شماست. کارت را برای شما تعویض می‌کنم.</div>
-                    </div>
-                    <strong>پاسخ:</strong> مشکل با تعویض کارت شارژ معیوب توسط کارمند بخش ارتباطات حل شد`
-                }
-            },
-            {
-                page: "15-16",
-                question: {
-                    ar: "ما هو اسم الفاعل واسم المفعول؟ اذكر أمثلة.",
-                    fa: "اسم فاعل و مفعول چیست؟ مثال بزنید."
-                },
-                answer: {
-                    ar: "- <strong>اسم الفاعل:</strong> من يقوم بالفعل (مثال: صانع، خالق)<br>- <strong>اسم المفعول:</strong> ما وقع عليه الفعل (مثال: مصنوع، مخلوق)",
-                    fa: "- <strong>اسم فاعل:</strong> انجام دهنده کار (مثال: سازنده، آفریدگار)<br>- <strong>اسم مفعول:</strong> چیزی که بر آن عمل انجام شده (مثال: ساخته شده، آفریده شده)"
-                }
-            },
-            {
-                page: 17,
-                question: {
-                    ar: "حدد الجمل الصحيحة والخاطئة:",
-                    fa: "جملات صحیح و غلط را مشخص کنید."
-                },
-                answer: {
-                    ar: "- ✓ <strong>يُمكِنُ شَرَاء الشَّرِيحَة مِن إدَارَة الاتِّصَالَات.</strong><br>- ✗ <strong>المُحِيطُ الهَادِئُ فِي شَمَال مَازَندَرَان.</strong>",
-                    fa: "- ✓ <strong>می‌توان سیم‌کارت را از اداره ارتباطات خریداری کرد.</strong><br>- ✗ <strong>اقیانوس آرام در شمال استان مازندران قرار دارد.</strong>"
-                }
-            },
-            {
-                page: "19-20",
-                question: {
-                    ar: "اذكر بعض عجائب خلق الله.",
-                    fa: "شگفتی‌های آفرینش خدا را نام ببرید."
-                },
-                answer: {
-                    ar: "- <strong>سرو عمره ٤٥٠٠ سنة في أبركوه</strong><br>- <strong>زنبق الماء العملاق في الأمازون</strong><br>- <strong>الشفق القطبي</strong><br>- <strong>غار عليصدر</strong>",
-                    fa: "- <strong>سرو ۴۵۰۰ ساله ابرکوه</strong><br>- <strong>نیلوفر آبی آمازون</strong><br>- <strong>شفق قطبی</strong><br>- <strong>غار علیصدر</strong>"
-                }
-            }
-        ];
-
-        function renderContent() {
-            const contentDiv = document.getElementById('content');
-            contentDiv.innerHTML = qaData.map(item => `
-                <div class="qa-section">
-                    <div class="question">
-                        <span class="language-tab active" onclick="switchLanguage(this, 'ar')">العربية</span>
-                        <span class="language-tab" onclick="switchLanguage(this, 'fa')">فارسی</span>
-                        <div class="language-content ar active">صفحة ${item.page}: ${item.question.ar}</div>
-                        <div class="language-content fa">صفحه ${item.page}: ${item.question.fa}</div>
-                    </div>
-                    <div class="answer">
-                        <span class="language-tab active" onclick="switchLanguage(this, 'ar')">العربية</span>
-                        <span class="language-tab" onclick="switchLanguage(this, 'fa')">فارسی</span>
-                        <div class="language-content ar active">${item.answer.ar}</div>
-                        <div class="language-content fa">${item.answer.fa}</div>
-                    </div>
-                    <div class="page-number">صفحة ${item.page}</div>
-                </div>
-            `).join('');
-        }
-
-        function switchLanguage(tabElement, lang) {
-            const container = tabElement.parentElement;
-            const tabs = container.querySelectorAll('.language-tab');
-            const contents = container.querySelectorAll('.language-content');
-            
-            tabs.forEach(tab => tab.classList.remove('active'));
-            contents.forEach(content => content.classList.remove('active'));
-            
-            tabElement.classList.add('active');
-            container.querySelector(`.language-content.${lang}`).classList.add('active');
-        }
-
-        document.addEventListener('DOMContentLoaded', renderContent);
-    </script>
 </body>
 </html>
